@@ -76,6 +76,7 @@ $result = $conn->query("SELECT * FROM data_movie");
         <input type="text" id="vdo_ex_url" name="vdo_ex_url" placeholder="https://example.com/video.mp4 or YouTube ID" required>
 
         <button type="submit">บันทึก</button>
+        <center>
     </form>
 
     <h2>รายการหนัง</h2>
@@ -87,6 +88,7 @@ $result = $conn->query("SELECT * FROM data_movie");
             <th>รูปภาพปก</th>
             <th>วิดีโอตัวอย่าง</th>
             <th>จัดการ</th>
+            <a href=./DashboardList.php>DashboardList</a>
         </tr>
         <?php while ($row = $result->fetch_assoc()): ?>
         <tr>
@@ -110,7 +112,7 @@ $result = $conn->query("SELECT * FROM data_movie");
         </tr>
         <?php endwhile; ?>
     </table>
-
+    </center>
     <script>
         function populateForm(data) {
             document.getElementById('name').value = data.name;

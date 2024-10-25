@@ -13,11 +13,15 @@ if (!$id) {
 // ตรวจสอบว่าเป็นการดึงข้อมูลภาพยนตร์หรือข้อมูลตอน
 if (!$list) {
     // ดึงข้อมูลภาพยนตร์
-    $query = mysqli_query($con, "SELECT * FROM data_movie WHERE id = $id");
+    $stmt = $con->prepare("SELECT * FROM data_movie WHERE id = ?");
+    $stmt->bind_param("i", $id);
 } else {
     // ดึงข้อมูลตอน
-    $query = mysqli_query($con, "SELECT * FROM data_list WHERE main_id = $id AND episode = $list");
+    $stmt = $con->prepare("SELECT * FROM data_list WHERE main_id = ? AND episode = ?");
+    $stmt->bind_param("ii", $id, $list);
 }
+$stmt->execute();
+$query = $stmt->get_result();
 
 // ตรวจสอบว่ามีผลลัพธ์จากการ query หรือไม่
 if ($query && mysqli_num_rows($query) > 0) {
@@ -26,6 +30,7 @@ if ($query && mysqli_num_rows($query) > 0) {
     echo 'Data not found';
     exit;
 }
+$num_list = mysqli_num_rows(mysqli_query($con, "SELECT * FROM data_list WHERE main_id = $id"));
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +38,7 @@ if ($query && mysqli_num_rows($query) > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?=$result['name']?></title>
+    <title><?= htmlspecialchars($result['name']) ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
@@ -41,7 +46,7 @@ if ($query && mysqli_num_rows($query) > 0) {
 </head>
 <body>
 
-<!-- เมนูส่วนบน   -->
+<!-- เมนูส่วนบน -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="./">Navbar</a>
@@ -77,7 +82,7 @@ if ($query && mysqli_num_rows($query) > 0) {
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="./">หน้าแรก</a></li>
-            <li class="breadcrumb-item"><a href="./"><?=$result['name']?></a></li>
+            <li class="breadcrumb-item"><a href="./list.php?id=<?=$id?>"><?= htmlspecialchars($result['name']) ?><??></a></li>
         </ol>
     </nav>
 
@@ -96,8 +101,30 @@ if ($query && mysqli_num_rows($query) > 0) {
              </div>
         </div>
     </div>
+    <div class="row">
+         <div class="col-md-4">
+            <a class="btn mb-1 shadow-sm text-center <?php if($list <= 1){echo "disabled";}?> " style="background-color: rgb(41, 36, 36);" href="play.php?id=<?=$id?>&list=<?=$list-1?>">
+                <h2 style="color: rgb(255, 255, 255);margin: 0;padding: 10px;width: 100%;">
+                    ตอนก่อนหน้า
+                </h2>
+            </a>
+        </div>
+         <div class="col-md-4">
+            <a class="btn mb-1 shadow-sm text-center" style="background-color: rgb(41, 36, 36);" href="./list.php?id=<?=$id?>">
+                <h2 style="color: rgb(255, 255, 255);margin: 0;padding: 10px;width: 100%;">
+                    ตอนอื่นๆ
+                </h2>
+            </a>
+        </div>
+         <div class="col-md-4">
+            <a class="btn mb-1 shadow-sm text-center <?php if($list >= $num_list){echo "disabled";}?> " style="background-color: rgb(41, 36, 36);" href="play.php?id=<?=$id?>&list=<?=$list+1?>">
+                <h2 style="color: rgb(255, 255, 255);margin: 0;padding: 10px;width: 100%;">
+                    ตอนถัดไป
+                </h2>
+            </a>
+        </div>
+    </div>
 </div>
-
 
 <footer class="blog-footer text-center">
     <p>ดูหนังฟรี ต้องที่นี้ <a href="./">Movie Php</a></p>
