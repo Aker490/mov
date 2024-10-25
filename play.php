@@ -49,7 +49,7 @@ $num_list = mysqli_num_rows(mysqli_query($con, "SELECT * FROM data_list WHERE ma
 <!-- เมนูส่วนบน -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="./">Navbar</a>
+    <a class="navbar-brand" href="./">Aker</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
