@@ -19,25 +19,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $img_url = isset($_POST['img_url']) ? $_POST['img_url'] : '';
     $vdo_ex_url = isset($_POST['vdo_ex_url']) ? $_POST['vdo_ex_url'] : '';
 
-    // Convert video ID to full YouTube URL if only ID is given
-    // if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $vdo_ex_url)) {
-    //     $vdo_ex_url = "https://www.youtube.com/watch?v=" . $vdo_ex_url;
-    // }
-
+    // Handle add action
     if ($action === 'add') {
-        $check_sql = "SELECT * FROM data_movie WHERE name = '$name' AND category = '$category' AND img = '$img_url' AND vdo_ex = '$vdo_ex_url'";
-        $check_result = $conn->query($check_sql);
+        $check_sql = "SELECT * FROM data_movie WHERE name = ? AND category = ? AND img = ? AND vdo_ex = ?";
+        $stmt = $conn->prepare($check_sql);
+        $stmt->bind_param("ssss", $name, $category, $img_url, $vdo_ex_url);
+        $stmt->execute();
+        $check_result = $stmt->get_result();
 
         if ($check_result->num_rows == 0) {
-            $sql = "INSERT INTO data_movie (name, category, status, img, vdo_ex) VALUES ('$name', '$category', '$status', '$img_url', '$vdo_ex_url')";
-            $conn->query($sql);
+            $sql = "INSERT INTO data_movie (name, category, status, img, vdo_ex) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sssss", $name, $category, $status, $img_url, $vdo_ex_url);
+            $stmt->execute();
         }
-    } elseif ($action === 'edit' && $id) {
-        $sql = "UPDATE data_movie SET name='$name', category='$category', status='$status', img='$img_url', vdo_ex='$vdo_ex_url' WHERE id=$id";
-        $conn->query($sql);
-    } elseif ($action === 'delete' && $id) {
-        $sql = "DELETE FROM data_movie WHERE id=$id";
-        $conn->query($sql);
+    } 
+    // Handle edit action
+    elseif ($action === 'edit' && $id) {
+        $sql = "UPDATE data_movie SET name=?, category=?, status=?, img=?, vdo_ex=? WHERE id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssssi", $name, $category, $status, $img_url, $vdo_ex_url, $id);
+
+        if ($stmt->execute()) {
+            echo "Record updated successfully.";
+        } else {
+            echo "Error updating record: " . $stmt->error;
+        }
+    } 
+    // Handle delete action
+    elseif ($action === 'delete' && $id) {
+        $sql = "DELETE FROM data_movie WHERE id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
     }
 }
 
@@ -57,6 +71,8 @@ $result = $conn->query("SELECT * FROM data_movie");
     <h1>Movie Dashboard</h1>
     <form id="add-movie-form" method="POST">
         <input type="hidden" name="action" value="add">
+        <input type="hidden" name="id" id="movie-id">
+        
         <label for="name">ชื่อเรื่อง:</label>
         <input type="text" id="name" name="name" required>
 
@@ -77,7 +93,6 @@ $result = $conn->query("SELECT * FROM data_movie");
         <input type="text" id="vdo_ex_url" name="vdo_ex_url" placeholder="https://example.com/video.mp4 or YouTube ID" required>
 
         <button type="submit">บันทึก</button>
-        <center>
     </form>
 
     <h2>รายการหนัง</h2>
@@ -89,7 +104,6 @@ $result = $conn->query("SELECT * FROM data_movie");
             <th>รูปภาพปก</th>
             <th>วิดีโอตัวอย่าง</th>
             <th>จัดการ</th>
-            <a href=./DashboardList.php>DashboardList</a>
         </tr>
         <?php while ($row = $result->fetch_assoc()): ?>
         <tr>
@@ -99,11 +113,7 @@ $result = $conn->query("SELECT * FROM data_movie");
             <td><a href="<?php echo $row['img']; ?>" target="_blank">ดูรูปภาพ</a></td>
             <td><a href="<?php echo $row['vdo_ex']; ?>" target="_blank">ดูวิดีโอตัวอย่าง</a></td>
             <td>
-                <form method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                    <input type="hidden" name="action" value="edit">
-                    <button type="button" onclick="populateForm(<?php echo htmlspecialchars(json_encode($row)); ?>)">แก้ไข</button>
-                </form>
+                <button type="button" onclick="populateForm(<?php echo htmlspecialchars(json_encode($row)); ?>)">แก้ไข</button>
                 <form method="POST" style="display:inline;">
                     <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                     <input type="hidden" name="action" value="delete">
@@ -113,19 +123,21 @@ $result = $conn->query("SELECT * FROM data_movie");
         </tr>
         <?php endwhile; ?>
     </table>
-    </center>
+
     <script>
-        function populateForm(data) {
-            document.getElementById('name').value = data.name;
-            document.getElementById('category').value = data.category;
-            document.getElementById('status').value = data.status;
-            document.getElementById('img_url').value = data.img;
-            document.getElementById('vdo_ex_url').value = data.vdo_ex;
-            document.querySelector("input[name='action']").value = 'edit';
-            document.querySelector("input[name='id']").value = data.id;
-        }
+    function populateForm(data) {
+        document.getElementById('name').value = data.name;
+        document.getElementById('category').value = data.category;
+        document.getElementById('status').value = data.status;
+        document.getElementById('img_url').value = data.img;
+        document.getElementById('vdo_ex_url').value = data.vdo_ex;
+        document.getElementById('movie-id').value = data.id;
+
+        document.querySelector("input[name='action']").value = 'edit';
+    }
     </script>
 </body>
 </html>
+
 
 <?php $conn->close(); ?>
