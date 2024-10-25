@@ -87,6 +87,7 @@ $result = $conn->query("SELECT * FROM data_list");
         <th>Main ID</th>
         <th>Episode</th>
         <th>จัดการ</th>
+        <a href=./Dashboard.php>Dashboard</a>
     </tr>
     <?php while ($row = $result->fetch_assoc()): ?>
     <tr>
