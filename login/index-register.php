@@ -10,7 +10,7 @@ require('connect.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="https://www.anime-sugoi.com/upload/icon.png?v=6">
+    <link rel="icon" href="https://png.pngtree.com/element_our/png/20181227/movie-icon-which-is-designed-for-all-application-purpose-new-png_287896.jpg?v=6">
 </head>
 <body>
 <form class="container" action="processregister.php" method="POST">

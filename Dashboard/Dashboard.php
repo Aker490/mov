@@ -51,6 +51,7 @@ $result = $conn->query("SELECT * FROM data_movie");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Dashboard</title>
     <link rel="stylesheet" href="Dashboard.css">
+    <link rel="icon" href="https://png.pngtree.com/element_our/png/20181227/movie-icon-which-is-designed-for-all-application-purpose-new-png_287896.jpg?v=6">
 </head>
 <body>
     <h1>Movie Dashboard</h1>
