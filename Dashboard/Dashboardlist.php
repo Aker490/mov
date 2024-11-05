@@ -17,25 +17,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $main_id = htmlspecialchars($_POST['main_id'] ?? '', ENT_QUOTES, 'UTF-8');
     $episode = htmlspecialchars($_POST['episode'] ?? '', ENT_QUOTES, 'UTF-8');
     $vdo = htmlspecialchars($_POST['vdo'] ?? '', ENT_QUOTES, 'UTF-8');
+    $vdo_02 = htmlspecialchars($_POST['vdo_02'] ?? '', ENT_QUOTES, 'UTF-8');
+    $vdo_03 = htmlspecialchars($_POST['vdo_03'] ?? '', ENT_QUOTES, 'UTF-8');
 
     if ($action === 'add') {
-        $check_sql = "SELECT * FROM data_list WHERE name = ? AND vdo = ? AND main_id = ? AND episode = ?";
+        $check_sql = "SELECT * FROM data_list WHERE name = ? AND vdo = ? AND vdo_02 = ? AND vdo_03 = ? AND main_id = ? AND episode = ?";
         $stmt = $conn->prepare($check_sql);
-        $stmt->bind_param("ssss", $name, $vdo, $main_id, $episode); // เพิ่ม "s" สำหรับ episode        
+        $stmt->bind_param("ssss", $name, $vdo, $vdo_02, $vdo_03, $main_id, $episode); // เพิ่ม "s" สำหรับ episode        
         $stmt->execute();
         $check_result = $stmt->get_result();
 
         if ($check_result->num_rows == 0) {
-            $insert_sql = "INSERT INTO data_list (name, main_id, vdo, episode) VALUES (?, ?, ?, ?)";
+            $insert_sql = "INSERT INTO data_list (name, main_id, vdo, $vdo_02, $vdo_03, episode) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($insert_sql);
-            $stmt->bind_param("ssss", $name, $main_id, $vdo, $episode); // แก้ไขตามจำนวนพารามิเตอร์            
+            $stmt->bind_param("ssss", $name, $main_id, $vdo, $vdo_02, $vdo_03, $episode); // แก้ไขตามจำนวนพารามิเตอร์            
             $stmt->execute();
         }
         $stmt->close();
     } elseif ($action === 'edit' && $id) {
-        $update_sql = "UPDATE data_list SET name=?, main_id=?, vdo=?, episode=? WHERE id=?";
+        $update_sql = "UPDATE data_list SET name=?, main_id=?, vdo=?, vdo_02=?, vdo_03=?, episode=? WHERE id=?";
         $stmt = $conn->prepare($update_sql);
-        $stmt->bind_param("sssii", $name, $main_id, $vdo, $episode, $id); // เปลี่ยนเป็น "sssii"        
+        $stmt->bind_param("sssii", $name, $main_id, $vdo, $vdo_02, $vdo_03, $episode, $id); // เปลี่ยนเป็น "sssii"        
         $stmt->execute();
         $stmt->close();
     } elseif ($action === 'delete' && $id) {
@@ -75,8 +77,12 @@ $result = $conn->query("SELECT * FROM data_list");
         <label for="episode">Episode</label>
         <input type="text" id="episode" name="episode" required>
 
-        <label for="vdo">ลิงก์วิดีโอตัวอย่าง หรือ Video ID:</label>
+        <label for="vdo">Video ID:</label>
         <input type="text" id="vdo" name="vdo" placeholder="https://example.com/video.mp4 or YouTube ID" required>
+        <label for="vdo">Video ID:</label>
+        <input type="text" id="vdo_02" name="vdo_02" placeholder="https://example.com/video.mp4 or YouTube ID" required>
+        <label for="vdo_02">Video ID:</label>
+        <input type="text" id="vdo_02" name="vdo_02" placeholder="https://example.com/video.mp4 or YouTube ID" required>
 
         <button type="submit">บันทึก</button>
     </form>
@@ -87,6 +93,9 @@ $result = $conn->query("SELECT * FROM data_list");
         <th>ชื่อเรื่อง</th>
         <th>Main ID</th>
         <th>Episode</th>
+        <th>Vdo</th>
+        <th>Vdo2</th>
+        <th>Vdo3</th>
         <th>จัดการ</th>
         <a href=./Dashboard.php>Dashboard</a>
     </tr>
@@ -95,6 +104,9 @@ $result = $conn->query("SELECT * FROM data_list");
         <td><?php echo $row['name']; ?></td>
         <td><?php echo $row['main_id']; ?></td> <!-- แก้ไขตรงนี้ให้แสดง Main ID โดยตรง -->
         <td><?php echo $row['episode']; ?></td> <!-- แก้ไขตรงนี้ให้แสดง Episode โดยตรง -->
+        <td><?php echo $row['vdo']; ?></td> <!-- แก้ไขตรงนี้ให้แสดง vdo โดยตรง -->
+        <td><?php echo $row['vdo_02']; ?></td> <!-- แก้ไขตรงนี้ให้แสดง vdo_02 โดยตรง -->
+        <td><?php echo $row['vdo_03']; ?></td> <!-- แก้ไขตรงนี้ให้แสดง vdo_03 โดยตรง -->
         <td>
             <form method="POST" style="display:inline;">
                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
@@ -118,6 +130,8 @@ $result = $conn->query("SELECT * FROM data_list");
             document.getElementById('main_id').value = data.main_id;
             document.getElementById('episode').value = data.episode;
             document.getElementById('vdo').value = data.vdo;
+            document.getElementById('vdo_02').value = data.vdo_02;
+            document.getElementById('vdo_03').value = data.vdo_02;
             document.querySelector("input[name='action']").value = 'edit';
             document.querySelector("input[name='id']").value = data.id;
         }

@@ -98,8 +98,9 @@ $result = $conn->query("SELECT * FROM data_movie");
 
         <button type="submit">บันทึก</button>
     </form>
-
+    <center>
     <h2>รายการหนัง</h2>
+    </center>
     <table>
         <tr>
             <th>ชื่อเรื่อง</th>
@@ -108,6 +109,9 @@ $result = $conn->query("SELECT * FROM data_movie");
             <th>รูปภาพปก</th>
             <th>วิดีโอตัวอย่าง</th>
             <th>จัดการ</th>
+            <center>
+            <a href=./Dashboard.php>Dashboard</a>
+            </center>
         </tr>
         <?php while ($row = $result->fetch_assoc()): ?>
         <tr>
@@ -128,7 +132,6 @@ $result = $conn->query("SELECT * FROM data_movie");
         </tr>
         <?php endwhile; ?>
     </table>
-
     <script>
     function populateForm(data) {
         document.getElementById('name').value = data.name;

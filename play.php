@@ -115,15 +115,12 @@ $num_list = mysqli_num_rows(mysqli_query($con, "SELECT * FROM data_list WHERE ma
                     </div>
                     <div class="tab-pane fade" id="play02">
                         <div class="card mb-4 shadow-sm">
-                            <iframe width="100%" height="623" src="https://www.youtube.com/embed/<?=$result['vdo_main2']?>"
-                                title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
+                            <iframe width="100%" height="623" src="https://short.ink/<?=$result['vdo_02']?>" frameborder="0" scrolling="0" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="play03">
                         <div class="card mb-4 shadow-sm">
-                            <iframe width="100%" height="623" src="https://www.youtube.com/embed/<?=$result['vdo_main3']?>"
+                            <iframe width="100%" height="623" src="https://www.youtube.com/embed/<?=$result['vdo_03']?>"
                                 title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen></iframe>
