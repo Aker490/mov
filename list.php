@@ -36,6 +36,7 @@ $query_list = mysqli_query($con, "SELECT * FROM data_list WHERE main_id = $id");
 
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,89 +44,96 @@ $query_list = mysqli_query($con, "SELECT * FROM data_list WHERE main_id = $id");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="https://png.pngtree.com/element_our/png/20181227/movie-icon-which-is-designed-for-all-application-purpose-new-png_287896.jpg?v=6">
+    <link rel="icon"
+        href="https://png.pngtree.com/element_our/png/20181227/movie-icon-which-is-designed-for-all-application-purpose-new-png_287896.jpg?v=6">
 </head>
+
 <body>
 
-<!-- เมนูส่วนบน -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="./">Aker</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link active" href="./">หน้าแรก</a></li>
-        <li class="nav-item"><a class="nav-link" href="./">Link</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Dropdown</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item"><a class="nav-link disabled">Disabled</a></li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
+    <!-- เมนูส่วนบน -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="./">Aker</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="./">หน้าแรก</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./">Link</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Dropdown</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link disabled">Disabled</a></li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
 
-<div class="album py-5">
-    <div class="container">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="./">หน้าแรก</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-    <?=$movie_result['name']?> 
-    <?php 
+    <div class="album py-5">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./">หน้าแรก</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <?=$movie_result['name']?>
+                        <?php 
         // ตรวจสอบสถานะของเรื่อง
         $status = ($movie_result['status'] == 'completed') ? 'จบแล้ว' : 'ยังไม่จบ';
         echo ' - ' . $status; 
     ?>
-</li>
+                    </li>
 
-        </ol>
-    </nav>
+                </ol>
+            </nav>
 
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <img src="<?=$movie_result['img']?>" width="100%" height="380" class="card-img-top" alt="Movie image">
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="card mb-4 shadow-sm">
-                <iframe width="100%" height="380" src="https://www.youtube.com/embed/<?=$movie_result['vdo_ex']?>" 
-                        title="YouTube video player" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <!-- แสดงสถานะของภาพยนตร์ -->
-            <p><strong>สถานะ:</strong> 
-                <?php 
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="<?=$movie_result['img']?>" width="100%" height="380" class="card-img-top"
+                            alt="Movie image">
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card mb-4 shadow-sm">
+                        <iframe width="100%" height="380"
+                            src="https://www.youtube.com/embed/<?=$movie_result['vdo_ex']?>"
+                            title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <!-- แสดงสถานะของภาพยนตร์ -->
+                    <p><strong>สถานะ:</strong>
+                        <?php 
                 if ($movie_result['status'] == 'completed') {
                     echo 'จบแล้ว';
                 } else {
                     echo 'ยังไม่จบ';
                 }
                 ?>
-            </p>
-        </div>
-    </div>
-
-    <div class="row">
-         <div class="col-md-12">
-            <div class="card mb-1 shadow-sm text-center" style="background-color: rgb(41, 36, 36);">
-                <h2 style="color: rgb(255, 255, 255);">ตอนทั้งหมด</h2>
+                    </p>
+                </div>
             </div>
-            <div class="card mb-4 shadow-sm">
-            <ul class="list-group">
-            <?php 
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-1 shadow-sm text-center" style="background-color: rgb(41, 36, 36);">
+                        <h2 style="color: rgb(255, 255, 255);">ตอนทั้งหมด</h2>
+                    </div>
+                    <div class="card mb-4 shadow-sm">
+                        <ul class="list-group">
+                            <?php 
 // แสดงข้อมูลตอนจาก query_list
 while($result_list = mysqli_fetch_array($query_list)) {
     // ตรวจสอบสถานะของแต่ละตอน
@@ -140,15 +148,16 @@ while($result_list = mysqli_fetch_array($query_list)) {
 }
 ?>
 
-</ul>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<footer class="blog-footer text-center">
-    <p>ดูหนังฟรี ต้องที่นี้ <a href="./">Movie Php</a></p>
-</footer>
+        <footer class="blog-footer text-center">
+            <p>ดูหนังฟรี ต้องที่นี้ <a href="./">Movie Php</a></p>
+        </footer>
 
 </body>
+
 </html>

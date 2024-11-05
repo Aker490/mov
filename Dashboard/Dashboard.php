@@ -60,19 +60,22 @@ $result = $conn->query("SELECT * FROM data_movie");
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Dashboard</title>
     <link rel="stylesheet" href="Dashboard.css">
-    <link rel="icon" href="https://png.pngtree.com/element_our/png/20181227/movie-icon-which-is-designed-for-all-application-purpose-new-png_287896.jpg?v=6">
+    <link rel="icon"
+        href="https://png.pngtree.com/element_our/png/20181227/movie-icon-which-is-designed-for-all-application-purpose-new-png_287896.jpg?v=6">
 </head>
+
 <body>
     <h1>Movie Dashboard</h1>
     <form id="add-movie-form" method="POST">
         <input type="hidden" name="action" value="add">
         <input type="hidden" name="id" id="movie-id">
-        
+
         <label for="name">ชื่อเรื่อง:</label>
         <input type="text" id="name" name="name" required>
 
@@ -90,7 +93,8 @@ $result = $conn->query("SELECT * FROM data_movie");
         <input type="url" id="img_url" name="img_url" placeholder="https://example.com/image.jpg" required>
 
         <label for="vdo_ex_url">ลิงก์วิดีโอตัวอย่าง หรือ Video ID:</label>
-        <input type="text" id="vdo_ex_url" name="vdo_ex_url" placeholder="https://example.com/video.mp4 or YouTube ID" required>
+        <input type="text" id="vdo_ex_url" name="vdo_ex_url" placeholder="https://example.com/video.mp4 or YouTube ID"
+            required>
 
         <button type="submit">บันทึก</button>
     </form>
@@ -113,7 +117,8 @@ $result = $conn->query("SELECT * FROM data_movie");
             <td><a href="<?php echo $row['img']; ?>" target="_blank">ดูรูปภาพ</a></td>
             <td><a href="<?php echo $row['vdo_ex']; ?>" target="_blank">ดูวิดีโอตัวอย่าง</a></td>
             <td>
-                <button type="button" onclick="populateForm(<?php echo htmlspecialchars(json_encode($row)); ?>)">แก้ไข</button>
+                <button type="button"
+                    onclick="populateForm(<?php echo htmlspecialchars(json_encode($row)); ?>)">แก้ไข</button>
                 <form method="POST" style="display:inline;">
                     <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                     <input type="hidden" name="action" value="delete">
@@ -137,6 +142,7 @@ $result = $conn->query("SELECT * FROM data_movie");
     }
     </script>
 </body>
+
 </html>
 
 
