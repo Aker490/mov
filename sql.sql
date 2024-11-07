@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   PRIMARY KEY (`id_account`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Dumping data for table movie.account: ~0 rows (approximately)
+-- Dumping data for table movie.account: ~1 rows (approximately)
 DELETE FROM `account`;
 INSERT INTO `account` (`id_account`, `username_account`, `password_account`, `salt_account`, `role_account`, `images_account`, `login_cont_account`, `lock_account`, `ban_account`, `login_count_account`) VALUES
 	(1, 'Admin', '$argon2id$v=19$m=65536,t=4,p=1$Mk1iV1czd0U4d0NmblF4Zg$ASH2LBkhP/4Bl/QQMDaTzEwCsav03PJJ9iyGNz86AAk', '81e058a0463f2b030a9cf5ad844c20135006b13a7dba61e90230661344114af5583e7f9091c3f21b58db455d257345793842975effb41e6806e54451c1c91f150a309a3688e39e74b39d718a49d16fc2c56b35f92313fb028ed5b08ecc6ee4b89187eef49b', 'admin', 'default_images_account.jpg', 0, 0, '0000-00-00 00:00:00', 0);
@@ -45,26 +45,28 @@ CREATE TABLE IF NOT EXISTS `data_list` (
   `main_id` int(3) NOT NULL,
   `name` text NOT NULL,
   `vdo` text NOT NULL,
+  `vdo_02` text NOT NULL,
+  `vdo_03` text NOT NULL,
   `episode` int(3) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Dumping data for table movie.data_list: ~13 rows (approximately)
 DELETE FROM `data_list`;
-INSERT INTO `data_list` (`id`, `main_id`, `name`, `vdo`, `episode`) VALUES
-	(1, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'MTgxKSYN0ms', 1),
-	(2, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'k8kugaeXhuQ', 2),
-	(3, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', '9PL2vu6gAYQ', 3),
-	(4, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'S_7VDwin12E', 4),
-	(5, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'mZ70VVGaf1M', 5),
-	(6, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'arrzbkOb91w', 6),
-	(7, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'g9JGeR50G6A', 7),
-	(8, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'vz5lVoWqzcY', 8),
-	(9, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'TJuIB98sZks', 9),
-	(10, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'thBT3GP46hI', 10),
-	(11, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'OEa5KsDmvfg', 11),
-	(12, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'PE0BfA00kK8', 12),
-	(13, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'BV0Bw583M6E', 13);
+INSERT INTO `data_list` (`id`, `main_id`, `name`, `vdo`, `vdo_02`, `vdo_03`, `episode`) VALUES
+	(1, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'MTgxKSYN0ms', 'ieBR_7OXn', 'fuqwdRjmisA', 1),
+	(2, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'k8kugaeXhuQ', 'ieBR_7OXn', 'fuqwdRjmisA', 2),
+	(3, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', '9PL2vu6gAYQ', '', '', 3),
+	(4, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'S_7VDwin12E', '', '', 4),
+	(5, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'mZ70VVGaf1M', '', '', 5),
+	(6, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'arrzbkOb91w', '', '', 6),
+	(7, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'g9JGeR50G6A', '', '', 7),
+	(8, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'vz5lVoWqzcY', '', '', 8),
+	(9, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'TJuIB98sZks', '', '', 9),
+	(10, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'thBT3GP46hI', '', '', 10),
+	(11, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'OEa5KsDmvfg', '', '', 11),
+	(12, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'PE0BfA00kK8', '', '', 12),
+	(13, 1, 'ไปต่างโลกก็ต้องไปกับสมาร์ทโฟนสิ 2 ', 'BV0Bw583M6E', '', '', 13);
 
 -- Dumping structure for table movie.data_movie
 CREATE TABLE IF NOT EXISTS `data_movie` (
