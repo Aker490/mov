@@ -1,5 +1,5 @@
 <?php
-include('connect.php');
+include('../connect.php');
 
 // ตรวจสอบว่า ID และ Episode ถูกส่งมาและเป็นตัวเลข
 $id = isset($_GET['id']) ? intval($_GET['id']) : null;
