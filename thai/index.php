@@ -1,5 +1,5 @@
 <?php
-include('connect.php');
+include('../connect.php');
 
 $limit_page = 8;
 $num_rows = mysqli_num_rows(mysqli_query($con,"SELECT * FROM data_movie_thai"));

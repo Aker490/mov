@@ -44,7 +44,7 @@ $limit_start = ($page - 1) * $limit_page; // Calculate the starting limit
                         <a class="nav-link active" aria-current="page" href="./">หน้าแรก</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./">Link</a>
+                        <a class="nav-link" href="./thai/index.php">พากย์ไทย</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

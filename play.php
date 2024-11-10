@@ -60,7 +60,7 @@ $num_list = mysqli_num_rows(mysqli_query($con, "SELECT * FROM data_list WHERE ma
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" href="./">หน้าแรก</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./">Link</a></li>
+                    <a class="nav-link" href="./thai/index.php">พากย์ไทย</a>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Dropdown</a>
                         <ul class="dropdown-menu">
@@ -85,16 +85,6 @@ $num_list = mysqli_num_rows(mysqli_query($con, "SELECT * FROM data_list WHERE ma
     <!-- Movie -->
     <div class="album py-5">
         <div class="container">
-
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="./">หน้าแรก</a></li>
-                    <li class="breadcrumb-item"><a
-                            href="./list.php?id=<?=$id?>"><?= htmlspecialchars($result['name']) ?>
-                            <??>
-                        </a></li>
-                </ol>
-            </nav>
 
             <div class="row">
                 <div class="col-md-12">
