@@ -11,7 +11,7 @@ if (!$id) {
 }
 
 // Query เพื่อดึงข้อมูลภาพยนตร์
-$query_movie = mysqli_query($con, "SELECT * FROM data_movie WHERE id = $id");
+$query_movie = mysqli_query($con, "SELECT * FROM data_movie_thai WHERE id = $id");
 $movie_result = mysqli_fetch_array($query_movie);
 
 if (!$movie_result) {
@@ -21,7 +21,7 @@ if (!$movie_result) {
 
 // Query เพื่อดึงข้อมูลตอน (ถ้ามีการระบุ episode)
 if ($episode) {
-    $query_episode = mysqli_query($con, "SELECT * FROM data_list WHERE main_id = $id AND episode = $episode");
+    $query_episode = mysqli_query($con, "SELECT * FROM data_list_thai WHERE main_id = $id AND episode = $episode");
     $episode_result = mysqli_fetch_array($query_episode);
 
     if (!$episode_result) {
@@ -31,7 +31,7 @@ if ($episode) {
 }
 
 // Query เพื่อดึงรายการตอนทั้งหมด
-$query_list = mysqli_query($con, "SELECT * FROM data_list WHERE main_id = $id");
+$query_list = mysqli_query($con, "SELECT * FROM data_list_thai WHERE main_id = $id");
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +95,7 @@ $query_list = mysqli_query($con, "SELECT * FROM data_list WHERE main_id = $id");
                             // ตรวจสอบสถานะของเรื่อง
                             $status = ($movie_result['status'] == 'completed') ? 'จบแล้ว' : 'ยังไม่จบ';
                             // ตรวจสอบประเภทเสียง
-                            $dub_type = ($movie_result['dub_type'] == 'sub') ? 'ซับไทย' : 'พากย์ไทย';
+                            $dub_type = ($movie_result['dub_type'] == 'dub') ? 'พากย์ไทย' : 'ซับไทย';
                             echo ' - ' . $status . ' - ' . $dub_type;
                             ?>
                     </li>
