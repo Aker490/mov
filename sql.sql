@@ -49,22 +49,23 @@ CREATE TABLE IF NOT EXISTS `data_list` (
   `vdo_03` text NOT NULL,
   `episode` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Dumping data for table movie.data_list: ~11 rows (approximately)
+-- Dumping data for table movie.data_list: ~12 rows (approximately)
 DELETE FROM `data_list`;
 INSERT INTO `data_list` (`id`, `main_id`, `name`, `vdo`, `vdo_02`, `vdo_03`, `episode`) VALUES
 	(1, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'VAQPdX1oZ6w', 'ieBR_7OXn', 'VAQPdX1oZ6w', 1),
 	(2, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'CprbLCpsbdQ', 'ieBR_7OXn', 'CprbLCpsbdQ', 2),
 	(3, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'SGElWgHeCQ0', 'ieBR_7OXn', 'SGElWgHeCQ0', 3),
-	(4, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'kpiP-lWcDKg', 'ieBR_7OXn', 'kpiP-lWcDKg', 44),
+	(4, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'kpiP-lWcDKg', 'ieBR_7OXn', 'kpiP-lWcDKg', 4),
 	(5, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'ObB4zxm4Wt4', 'ieBR_7OXn', 'ObB4zxm4Wt4', 5),
 	(6, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', '_rk-nJznLEk', 'ieBR_7OXn', '_rk-nJznLEk', 6),
-	(7, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', '-MMovWZzAgo', 'ieBR_7OXn', '-MMovWZzAgo', 7),
-	(8, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'GTu6aeQNt54', 'ieBR_7OXn', 'GTu6aeQNt54', 8),
-	(9, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'NU4uQO6CI4g', 'ieBR_7OXn', 'NU4uQO6CI4g', 9),
-	(10, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'RA7diMmaeUE', 'ieBR_7OXn', 'RA7diMmaeUE', 10),
-	(11, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'A4dXkOwoz1c', 'ieBR_7OXn', 'A4dXkOwoz1c', 11);
+	(7, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'GTu6aeQNt54', 'ieBR_7OXn', 'GTu6aeQNt54', 7),
+	(8, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'NU4uQO6CI4g', 'ieBR_7OXn', 'NU4uQO6CI4g', 8),
+	(9, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'RA7diMmaeUE', 'ieBR_7OXn', 'RA7diMmaeUE', 9),
+	(10, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'A4dXkOwoz1c', 'ieBR_7OXn', 'A4dXkOwoz1c', 10),
+	(11, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'KOL5c5_RlvI', 'ieBR_7OXn', 'KOL5c5_RlvI', 11),
+	(12, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'odRXo9j4ey0', 'ieBR_7OXn', 'odRXo9j4ey0', 12);
 
 -- Dumping structure for table movie.data_list_thai
 CREATE TABLE IF NOT EXISTS `data_list_thai` (
@@ -76,10 +77,23 @@ CREATE TABLE IF NOT EXISTS `data_list_thai` (
   `vdo_03` text NOT NULL,
   `episode` int(3) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=458689 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table movie.data_list_thai: ~0 rows (approximately)
+-- Dumping data for table movie.data_list_thai: ~12 rows (approximately)
 DELETE FROM `data_list_thai`;
+INSERT INTO `data_list_thai` (`id`, `main_id`, `name`, `vdo`, `vdo_02`, `vdo_03`, `episode`) VALUES
+	(1, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'vz5lVoWqzcY', 'ieBR_7OXn', 'vz5lVoWqzcY', 1),
+	(2, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'TJuIB98sZks', 'ieBR_7OXn', 'TJuIB98sZks', 2),
+	(3, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'thBT3GP46hI', 'ieBR_7OXn', 'thBT3GP46hI', 3),
+	(4, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'S_7VDwin12E', 'ieBR_7OXn', 'S_7VDwin12E', 4),
+	(5, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'PE0BfA00kK8', 'ieBR_7OXn', 'PE0BfA00kK8', 5),
+	(6, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'OEa5KsDmvfg', 'ieBR_7OXn', 'OEa5KsDmvfg', 6),
+	(7, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'mZ70VVGaf1M', 'ieBR_7OXn', 'mZ70VVGaf1M', 7),
+	(8, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'MTgxKSYN0ms', 'ieBR_7OXn', 'MTgxKSYN0ms', 8),
+	(9, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'k8kugaeXhuQ', 'ieBR_7OXn', 'k8kugaeXhuQ', 9),
+	(10, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'g9JGeR50G6A', 'ieBR_7OXn', 'g9JGeR50G6A', 10),
+	(11, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'arrzbkOb91w', 'ieBR_7OXn', 'arrzbkOb91w', 11),
+	(12, 1, 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', '9PL2vu6gAYQ', 'ieBR_7OXn', '9PL2vu6gAYQ', 12);
 
 -- Dumping structure for table movie.data_movie
 CREATE TABLE IF NOT EXISTS `data_movie` (
@@ -87,18 +101,18 @@ CREATE TABLE IF NOT EXISTS `data_movie` (
   `img` text NOT NULL,
   `name` text NOT NULL,
   `vdo_ex` text NOT NULL,
-  `vdo_main` text NOT NULL,
   `status` varchar(255) DEFAULT 'ongoing',
   `category` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
+  `dub_type` varchar(255) DEFAULT 'sub',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Dumping data for table movie.data_movie: ~2 rows (approximately)
 DELETE FROM `data_movie`;
-INSERT INTO `data_movie` (`id`, `img`, `name`, `vdo_ex`, `vdo_main`, `status`, `category`, `description`) VALUES
-	(1, 'https://fairyanime.net/uploads/326589390792dc61d24cd2e81673b3583JwJNnx.jpg', 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'KKOyD6Y4j60', '', '	ongoing', 'action', NULL),
-	(2, 'https://animeyuzu.com/wp-content/uploads/2017/07/Isekai-wa-Smartphone-to-Tomo-ni-185x278.jpg', 'Isekai wa Smartphone to Tomo ni ตอนที่ 1-12 ซับไทย', 'qxOkaU6RVz4', '', 'ongoing', 'action', NULL);
+INSERT INTO `data_movie` (`id`, `img`, `name`, `vdo_ex`, `status`, `category`, `description`, `dub_type`) VALUES
+	(1, 'https://fairyanime.net/uploads/326589390792dc61d24cd2e81673b3583JwJNnx.jpg', 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', '-MMovWZzAgo', 'completed', 'action', NULL, 'sub'),
+	(2, 'https://animeyuzu.com/wp-content/uploads/2017/07/Isekai-wa-Smartphone-to-Tomo-ni-185x278.jpg', 'Isekai wa Smartphone to Tomo ni ตอนที่ 1-12 ซับไทย', 'qxOkaU6RVz4', 'completed', 'action', NULL, 'sub');
 
 -- Dumping structure for table movie.data_movie_thai
 CREATE TABLE IF NOT EXISTS `data_movie_thai` (
@@ -106,18 +120,18 @@ CREATE TABLE IF NOT EXISTS `data_movie_thai` (
   `img` text NOT NULL,
   `name` text NOT NULL,
   `vdo_ex` text NOT NULL,
-  `vdo_main` text NOT NULL,
   `status` varchar(255) DEFAULT 'ongoing',
   `category` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
+  `dub_type` varchar(255) DEFAULT 'ongoing',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table movie.data_movie_thai: ~2 rows (approximately)
 DELETE FROM `data_movie_thai`;
-INSERT INTO `data_movie_thai` (`id`, `img`, `name`, `vdo_ex`, `vdo_main`, `status`, `category`, `description`) VALUES
-	(1, 'https://fairyanime.net/uploads/326589390792dc61d24cd2e81673b3583JwJNnx.jpg', 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', 'KKOyD6Y4j60', '', '	ongoing', 'action', NULL),
-	(2, 'https://animeyuzu.com/wp-content/uploads/2017/07/Isekai-wa-Smartphone-to-Tomo-ni-185x278.jpg', 'Isekai wa Smartphone to Tomo ni ตอนที่ 1-12 ซับไทย', 'qxOkaU6RVz4', '', 'ongoing', 'action', NULL);
+INSERT INTO `data_movie_thai` (`id`, `img`, `name`, `vdo_ex`, `status`, `category`, `description`, `dub_type`) VALUES
+	(1, 'https://fairyanime.net/uploads/326589390792dc61d24cd2e81673b3583JwJNnx.jpg', 'Isekai wa Smartphone to Tomo ni 2 ไปต่างโลกกับสมาร์ทโฟน ภาค 2', '-MMovWZzAgo', 'ongoing', 'action', NULL, 'dub'),
+	(2, 'https://animeyuzu.com/wp-content/uploads/2017/07/Isekai-wa-Smartphone-to-Tomo-ni-185x278.jpg', 'Isekai wa Smartphone to Tomo ni ตอนที่ 1-12 ซับไทย', 'qxOkaU6RVz4', 'ongoing', 'action', NULL, 'dub');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
