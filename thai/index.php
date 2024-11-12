@@ -2,14 +2,29 @@
 include('../connect.php');
 
 $limit_page = 8;
-$num_rows = mysqli_num_rows(mysqli_query($con,"SELECT * FROM data_movie_thai"));
-// Check if 'Page' is set in the URL query parameters
-$page = isset($_GET['Page']) ? (int)$_GET['Page'] : 1; // Default to 1 if not set
 
-$num_page = $num_rows/$limit_page;
+// Handle search query if it exists
+$search_query = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
 
-$limit_start = ($page - 1) * $limit_page; // Calculate the starting limit
+// Modify SQL query based on search query
+if ($search_query) {
+    $query_sql = "SELECT * FROM data_movie_thai WHERE name LIKE '%$search_query%'";
+} else {
+    $query_sql = "SELECT * FROM data_movie_thai";
+}
 
+$num_rows = mysqli_num_rows(mysqli_query($con, $query_sql));
+
+$page = isset($_GET['Page']) ? (int)$_GET['Page'] : 1;
+$num_page = ceil($num_rows / $limit_page);
+$limit_start = ($page - 1) * $limit_page;
+
+$query_sql .= " ORDER BY id DESC LIMIT $limit_start, $limit_page";
+$query = mysqli_query($con, $query_sql);
+
+if (!$query) {
+    die('Query failed: ' . mysqli_error($con));
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +40,6 @@ $limit_start = ($page - 1) * $limit_page; // Calculate the starting limit
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon"
-        href="https://icons.veryicon.com/png/o/miscellaneous/logo-design-of-lingzhuyun/icon-correct-24-1.png?v=6">
 </head>
 
 <body>
@@ -43,48 +56,27 @@ $limit_start = ($page - 1) * $limit_page; // Calculate the starting limit
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="./">หน้าแรก</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                    </li>
+                    <!-- other nav items -->
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <!-- Search form -->
+                <form class="d-flex" role="search" method="get" action="">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="<?= htmlentities($search_query) ?>">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
         </div>
     </nav>
-    <!-- เมนูส่วนบน   -->
 
     <div class="album py-5">
         <div class="container">
-
             <div class="row">
                 <?php
-        $query = mysqli_query($con,"SELECT * FROM data_movie_thai ORDER BY id DESC LIMIT $limit_start,$limit_page");
-        while($result = mysqli_fetch_array($query)){
-        ?>
+                while($result = mysqli_fetch_array($query)){
+                ?>
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
                         <a href="./list.php?id=<?=$result['id']?>">
-                            <img src="<?=$result['img']?>" width="100%" height="400" alt="aa">
+                            <img src="<?=$result['img']?>" width="100%" height="400" alt="<?=$result['name']?>">
                             <div class="card-body">
                                 <p class="card-text text-center"><?=$result['name']?></p>
                             </div>
@@ -93,47 +85,40 @@ $limit_start = ($page - 1) * $limit_page; // Calculate the starting limit
                 </div>
                 <?php } ?>
             </div>
+
+            <!-- Pagination -->
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
                     <li class="page-item <?php if($page <= 1) echo 'disabled'; ?>">
-                        <a class="page-link" href="?Page=<?php echo $page - 1; ?>">ก่อน</a>
+                        <a class="page-link" href="?Page=<?php echo $page - 1; ?>&search=<?php echo urlencode($search_query); ?>">ก่อน</a>
                     </li>
-
                     <?php 
-        // Logic สำหรับการย่อหน้าและการไฮไลท์หน้าปัจจุบัน
-        $total_query = mysqli_query($con, "SELECT COUNT(*) as total FROM data_movie_thai");
-        $total_result = mysqli_fetch_array($total_query);
-        $total_pages = ceil($total_result['total'] / $limit_page);
+                    $range = 2;
+                    $total_pages = ceil($num_rows / $limit_page);
 
-        $range = 2; // จำนวนหน้าที่แสดงก่อนและหลังหน้าปัจจุบัน
-        $first_page = 1;
-        $last_page = $total_pages;
+                    if ($page > ($range + 1)) {
+                        echo '<li class="page-item"><a class="page-link" href="?Page=1&search='.urlencode($search_query).'">1</a></li>';
+                        echo '<li class="page-item disabled"><span class="page-link">..</span></li>';
+                    }
 
-        if ($page > ($range + 1)) {
-            echo '<li class="page-item"><a class="page-link" href="?Page='.$first_page.'">'.$first_page.'</a></li>';
-            echo '<li class="page-item disabled"><span class="page-link">..</span></li>';
-        }
+                    for ($i = max($page - $range, 1); $i <= min($page + $range, $total_pages); $i++) {
+                        echo '<li class="page-item '.($page == $i ? 'active' : '').'"><a class="page-link" href="?Page='.$i.'&search='.urlencode($search_query).'">'.$i.'</a></li>';
+                    }
 
-        for ($i = max($page - $range, 1); $i <= min($page + $range, $total_pages); $i++) {
-            echo '<li class="page-item '.($page == $i ? 'active' : '').'"><a class="page-link" href="?Page='.$i.'">'.$i.'</a></li>';
-        }
-
-        if ($page < ($total_pages - $range)) {
-            echo '<li class="page-item disabled"><span class="page-link">..</span></li>';
-            echo '<li class="page-item"><a class="page-link" href="?Page='.$last_page.'">'.$last_page.'</a></li>';
-        }
-        ?>
-
+                    if ($page < ($total_pages - $range)) {
+                        echo '<li class="page-item disabled"><span class="page-link">..</span></li>';
+                        echo '<li class="page-item"><a class="page-link" href="?Page='.$total_pages.'&search='.urlencode($search_query).'">'.$total_pages.'</a></li>';
+                    }
+                    ?>
                     <li class="page-item <?php if($page >= $total_pages) echo 'disabled'; ?>">
-                        <a class="page-link" href="?Page=<?php echo $page + 1; ?>">หลัง</a>
+                        <a class="page-link" href="?Page=<?php echo $page + 1; ?>&search=<?php echo urlencode($search_query); ?>">หลัง</a>
                     </li>
                 </ul>
             </nav>
-
         </div>
 
         <footer class="blog-footer text-center">
-            <p>ดุหนังฟรี ต้องที่นี้ <a href="./">Movie Php</a></p>
+            <p>ดูหนังฟรี ต้องที่นี้ <a href="./">Movie Php</a></p>
         </footer>
 </body>
 
